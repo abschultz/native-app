@@ -1,9 +1,9 @@
 import React from "react";
 import { Platform, StatusBar } from "react-native";
 import {
-  StackNavigator,
-  TabNavigator,
-  SwitchNavigator
+  createStackNavigator,
+  createTabNavigator,
+  createSwitchNavigator
 } from "react-navigation";
 import { FontAwesome } from "react-native-vector-icons";
 
@@ -17,7 +17,7 @@ const headerStyle = {
   marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0
 };
 
-export const SignedOut = StackNavigator({
+export const SignedOut = createStackNavigator({
   SignUp: {
     screen: SignUp,
     navigationOptions: {
@@ -34,7 +34,7 @@ export const SignedOut = StackNavigator({
   }
 });
 
-export const SignedIn = TabNavigator(
+export const SignedIn = createTabNavigator(
   {
     Home: {
       screen: Home,
@@ -50,7 +50,7 @@ export const SignedIn = TabNavigator(
       navigationOptions: {
         tabBarLabel: "Notes",
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="home" size={30} color={tintColor} />
+          <FontAwesome name="clipboard" size={30} color={tintColor} />
         )
       }
     },
@@ -74,7 +74,7 @@ export const SignedIn = TabNavigator(
 );
 
 export const createRootNavigator = (signedIn = false) => {
-  return SwitchNavigator(
+  return createSwitchNavigator(
     {
       SignedIn: {
         screen: SignedIn
